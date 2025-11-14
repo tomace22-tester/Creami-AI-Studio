@@ -60,7 +60,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.85rem;
-      align-items: center;    /* center pills in their columns */
+      align-items: center;
       justify-content: center;
       text-align: center;
     }
@@ -80,11 +80,11 @@
 
     .title-main {
       font-family: "Georgia", "Times New Roman", serif;
-      font-size: 3rem;                /* bigger title */
+      font-size: 3rem;
       font-weight: 900;
       letter-spacing: -0.04em;
       margin: 0 0 0.3rem;
-      text-shadow: 0 3px 6px rgba(0,0,0,0.35);  /* more pop */
+      text-shadow: 0 3px 6px rgba(0,0,0,0.35);
     }
 
     .title-sub {
@@ -103,7 +103,7 @@
 
     .pill-badge {
       border-radius: var(--radius-pill);
-      padding: 0.75rem 1.9rem;        /* bigger bubbles */
+      padding: 0.75rem 1.9rem;
       font-size: 1rem;
       font-weight: 700;
       color: #2c1810;
@@ -113,34 +113,20 @@
       gap: 0.6rem;
       box-shadow: var(--shadow-soft);
       border: 2px solid rgba(0,0,0,0.15);
-      min-width: 240px;               /* consistent big pills */
+      min-width: 240px;
     }
 
-    .pill-yellow {
-      background: var(--accent-yellow);
-    }
-
-    .pill-green {
-      background: var(--accent-green);
-    }
-
-    .pill-orange {
-      background: var(--accent-orange);
-    }
-
-    .pill-red {
-      background: var(--accent-red);
-    }
+    .pill-yellow { background: var(--accent-yellow); }
+    .pill-green  { background: var(--accent-green); }
+    .pill-orange { background: var(--accent-orange); }
+    .pill-red    { background: var(--accent-red); }
 
     .pill-icon {
       display: inline-flex;
       align-items: center;
       justify-content: center;
     }
-
-    .pill-icon svg {
-      display: block;
-    }
+    .pill-icon svg { display: block; }
 
     /* ========== MAIN PANELS ========== */
 
@@ -176,8 +162,6 @@
       margin-top: 0;
       margin-bottom: 0.75rem;
     }
-
-    /* form layout inside left panel */
 
     .form-section {
       font-size: 0.9rem;
@@ -337,8 +321,6 @@
       color: #374151;
     }
 
-    /* current recipe content */
-
     .macro-row {
       font-size: 0.8rem;
       display: flex;
@@ -370,8 +352,6 @@
       font-size: 0.9rem;
       color: #374151;
     }
-
-    /* bottom cards */
 
     .bottom-grid {
       display: grid;
@@ -405,32 +385,6 @@
       font-family: "Georgia", "Times New Roman", serif;
     }
 
-    .bottom-card label {
-      color: #fdfdfd;
-    }
-
-    .bottom-card input {
-      background: #ebf8ff;
-    }
-
-    .bottom-card p {
-      color: #e0f2fe;
-      margin-top: 0.25rem;
-      margin-bottom: 0.25rem;
-    }
-
-    code {
-      font-size: 0.82rem;
-      background: rgba(0,0,0,0.2);
-      padding: 0.12rem 0.3rem;
-      border-radius: 4px;
-    }
-
-    .tag-muted-light {
-      font-size: 0.8rem;
-      color: #dbeafe;
-    }
-
   </style>
 </head>
 <body>
@@ -441,7 +395,7 @@
     <div class="header-left">
       <div class="pill-badge pill-yellow">
         <span class="pill-icon">
-          <!-- dumbbell / strength SVG - bigger -->
+          <!-- dumbbell / strength SVG -->
           <svg width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <rect x="5" y="9" width="2" height="6" rx="0.7" fill="#78350f"/>
             <rect x="17" y="9" width="2" height="6" rx="0.7" fill="#78350f"/>
@@ -454,7 +408,7 @@
       </div>
       <div class="pill-badge pill-green">
         <span class="pill-icon">
-          <!-- leaf / fit vibes SVG - bigger -->
+          <!-- leaf / fit vibes SVG -->
           <svg width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M5 19C5 15 8 10 13 9V7C13 5.34315 14.3431 4 16 4C17.6569 4 19 5.34315 19 7V8C19 13 15 19 9 20.5C6.5 21.1 5 20 5 19Z"
                   fill="#15803d" opacity="0.25"/>
@@ -477,7 +431,7 @@
     <div class="header-right">
       <div class="pill-badge pill-orange">
         <span class="pill-icon">
-          <!-- ice cream SVG - bigger -->
+          <!-- ice cream SVG -->
           <svg width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M7 11C5.9 11 5 10.1 5 9C5 7.9 5.9 7 7 7C7.2 7 7.4 7 7.6 7.1C8 5.9 9.1 5 10.4 5C11 5 11.5 5.2 12 5.5C12.4 4.6 13.3 4 14.3 4C15.8 4 17 5.2 17 6.6C17 6.7 17 6.8 17 6.9C17.6 7.1 18 7.7 18 8.4C18 9.3 17.3 10 16.4 10H7Z"
                   fill="#fef3c7"/>
@@ -489,7 +443,7 @@
       </div>
       <div class="pill-badge pill-red">
         <span class="pill-icon">
-          <!-- heart/macro SVG - bigger -->
+          <!-- heart/macro SVG -->
           <svg width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 19C12 19 6 15 6 10.5C6 8.6 7.6 7 9.5 7C10.6 7 11.6 7.6 12 8.4C12.4 7.6 13.4 7 14.5 7C16.4 7 18 8.6 18 10.5C18 15 12 19 12 19Z"
                   fill="#fee2e2"/>
@@ -571,17 +525,38 @@
     </div>
   </div>
 
-  <!-- BOTTOM SECTION: cookbook + API -->
+  <!-- BOTTOM SECTION: cookbook -->
   <div class="bottom-grid">
     <div class="bottom-card">
       <h3>My Creami cookbook</h3>
       <div id="cookbook"></div>
     </div>
 
+    <div class="bottom-card">
+      <h3>How this works</h3>
+      <p>
+        When you hit “Generate recipe”, this page sends your flavor + macro targets to a secure
+        API that lives on the server. That API talks to OpenAI and sends back a recipe that matches
+        your macros as closely as possible while prioritizing taste and Creami texture.
+      </p>
+      <p>
+        Your OpenAI key is not stored in the browser and never exposed to other users.
+      </p>
+    </div>
+  </div>
+</div>
 
 <script>
-  // ====== Storage helpers ======
+  const cookbookDiv = document.getElementById('cookbook');
+  const currentRecipeCard = document.getElementById('currentRecipeCard');
+  const recipeContentDiv = document.getElementById('recipeContent');
+  const statusDiv = document.getElementById('status');
+  const generateBtn = document.getElementById('generateBtn');
+  const regenerateBtn = document.getElementById('regenerateBtn');
+  const saveRecipeBtn = document.getElementById('saveRecipeBtn');
 
+  let lastRequestPayload = null;
+  let currentRecipe = null;
 
   function getCookbook() {
     const savedCookbook = localStorage.getItem('creami_cookbook');
@@ -598,74 +573,69 @@
     renderCookbook(recipes);
   }
 
-function renderCookbook(recipes) {
-  if (!recipes.length) {
-    cookbookDiv.innerHTML = '<p>No recipes saved yet. Generate a recipe and click “Save to my Creami cookbook”.</p>';
-    return;
+  function renderCookbook(recipes) {
+    if (!recipes.length) {
+      cookbookDiv.innerHTML = '<p>No recipes saved yet. Generate a recipe and click “Save to my Creami cookbook”.</p>';
+      return;
+    }
+
+    cookbookDiv.innerHTML = '';
+    recipes.forEach((r, idx) => {
+      const card = document.createElement('div');
+      card.style.borderRadius = '12px';
+      card.style.border = '1px solid rgba(255,255,255,0.6)';
+      card.style.background = 'rgba(191,239,255,0.18)';
+      card.style.padding = '0.55rem 0.6rem';
+      card.style.marginBottom = '0.6rem';
+
+      card.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.25rem;gap:0.4rem;">
+          <div style="flex:1 1 auto;min-width:0;">
+            <div style="font-weight:700;font-size:0.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+              ${r.title || 'Untitled recipe'}
+            </div>
+            <div style="font-size:0.78rem;opacity:0.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+              ${r.flavor || ''}
+            </div>
+          </div>
+          <div style="display:flex;gap:0.35rem;flex-shrink:0;">
+            <button class="btn-secondary btn-small" data-load-index="${idx}">Load</button>
+            <button class="btn-secondary btn-small" data-delete-index="${idx}" style="background:#fee2e2;border-color:#fecaca;color:#7f1d1d;">
+              Delete
+            </button>
+          </div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;font-size:0.78rem;">
+          <span class="macro-pill">${r.macros?.calories ?? '—'} kcal</span>
+          <span class="macro-pill">${r.macros?.protein_g ?? '—'} g protein</span>
+          <span class="macro-pill">${r.macros?.carbs_g ?? '—'} g carbs</span>
+          <span class="macro-pill">${r.macros?.fat_g ?? '—'} g fat</span>
+        </div>
+      `;
+
+      const loadBtn = card.querySelector('button[data-load-index]');
+      const deleteBtn = card.querySelector('button[data-delete-index]');
+
+      loadBtn.addEventListener('click', () => {
+        renderRecipe(r);
+        currentRecipe = r;
+        currentRecipeCard.style.display = 'block';
+      });
+
+      deleteBtn.addEventListener('click', () => {
+        const cookbook = getCookbook();
+        cookbook.splice(idx, 1);
+        saveCookbook(cookbook);
+        statusDiv.textContent = 'Recipe removed from your Creami cookbook.';
+      });
+
+      cookbookDiv.appendChild(card);
+    });
   }
 
-  cookbookDiv.innerHTML = '';
-  recipes.forEach((r, idx) => {
-    const card = document.createElement('div');
-    card.style.borderRadius = '12px';
-    card.style.border = '1px solid rgba(255,255,255,0.6)';
-    card.style.background = 'rgba(191,239,255,0.18)';
-    card.style.padding = '0.55rem 0.6rem';
-    card.style.marginBottom = '0.6rem';
-
-    card.innerHTML = `
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.25rem;gap:0.4rem;">
-        <div style="flex:1 1 auto;min-width:0;">
-          <div style="font-weight:700;font-size:0.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-            ${r.title || 'Untitled recipe'}
-          </div>
-          <div style="font-size:0.78rem;opacity:0.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-            ${r.flavor || ''}
-          </div>
-        </div>
-        <div style="display:flex;gap:0.35rem;flex-shrink:0;">
-          <button class="btn-secondary btn-small" data-load-index="${idx}">Load</button>
-          <button class="btn-secondary btn-small" data-delete-index="${idx}" style="background:#fee2e2;border-color:#fecaca;color:#7f1d1d;">
-            Delete
-          </button>
-        </div>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:0.4rem;font-size:0.78rem;">
-        <span class="macro-pill">${r.macros?.calories ?? '—'} kcal</span>
-        <span class="macro-pill">${r.macros?.protein_g ?? '—'} g protein</span>
-        <span class="macro-pill">${r.macros?.carbs_g ?? '—'} g carbs</span>
-        <span class="macro-pill">${r.macros?.fat_g ?? '—'} g fat</span>
-      </div>
-    `;
-
-    const loadBtn = card.querySelector('button[data-load-index]');
-    const deleteBtn = card.querySelector('button[data-delete-index]');
-
-    // Load button
-    loadBtn.addEventListener('click', () => {
-      renderRecipe(r);
-      currentRecipe = r;
-      currentRecipeCard.style.display = 'block';
-    });
-
-    // Delete button
-    deleteBtn.addEventListener('click', () => {
-      const cookbook = getCookbook();
-      cookbook.splice(idx, 1);      // remove this recipe
-      saveCookbook(cookbook);       // updates localStorage + re-renders
-      statusDiv.textContent = 'Recipe removed from your Creami cookbook.';
-    });
-
-    cookbookDiv.appendChild(card);
-  });
-}
-
-
-  // ====== Core generation logic ======
   async function generateRecipe() {
-
     const flavor = document.getElementById('flavor').value.trim();
-       const protein = Number(document.getElementById('protein').value);
+    const protein = Number(document.getElementById('protein').value);
     const calories = Number(document.getElementById('calories').value);
     const baseStyle = document.getElementById('baseStyle').value;
     const avoid = document.getElementById('avoid').value.trim();
@@ -760,26 +730,24 @@ Return ONLY strict JSON with this shape, no extra commentary:
 
       const userPrompt = buildUserPrompt(payload);
 
-const response = await fetch("/api/creami", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    userPrompt,
-    systemPrompt
-  })
-});
-
+      const response = await fetch("/api/creami", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          userPrompt,
+          systemPrompt
+        })
+      });
 
       if (!response.ok) {
         const text = await response.text();
-        throw new Error("OpenAI API error: " + text);
+        throw new Error("API error: " + text);
       }
 
       const data = await response.json();
       const content = data.choices[0].message.content.trim();
-
       const jsonText = content.replace(/```json/g, '').replace(/```/g, '');
       const recipe = JSON.parse(jsonText);
 
@@ -865,13 +833,7 @@ const response = await fetch("/api/creami", {
   }
 
   generateBtn.addEventListener('click', () => generateRecipe());
-  regenerateBtn.addEventListener('click', () => {
-    if (!lastRequestPayload) {
-      generateRecipe();
-    } else {
-      generateRecipe();
-    }
-  });
+  regenerateBtn.addEventListener('click', () => generateRecipe());
 
   saveRecipeBtn.addEventListener('click', () => {
     if (!currentRecipe) return;
@@ -881,8 +843,8 @@ const response = await fetch("/api/creami", {
     statusDiv.textContent = 'Recipe saved to your Creami cookbook.';
   });
 
-  loadFromStorage();
+  // initial load
+  saveCookbook(getCookbook());
 </script>
 </body>
 </html>
-

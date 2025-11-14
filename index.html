@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Creami AI Studio • Design your perfect pint</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg-main: #0087a0;        /* teal background */
+      --panel-bg: #bfeeff;       /* light blue panels */
+      --panel-border: #7fd3ef;
+      --accent-yellow: #ffd966;
+      --accent-green: #8edc6f;
+      --accent-orange: #ff9b68;
+      --accent-red: #ff6464;
+      --text-dark: #222222;
+      --text-muted: #374151;
+      --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.25);
+      --radius-panel: 18px;
+      --radius-pill: 9999px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-main);
+      color: var(--text-dark);
+    }
+
+    .app {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 3rem;
+    }
+
+    /* ========== HEADER AREA ========== */
+
+    .header {
+      display: grid;
+      grid-template-columns: 1.5fr 2.2fr 1.5fr;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    @media (max-width: 900px) {
+      .header {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+
+    .header-left,
+    .header-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      align-items: center;    /* center pills in their columns */
+      justify-content: center;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .header-left,
+      .header-right {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    .header-center {
+      text-align: center;
+    }
+
+    .title-main {
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: 3rem;                /* bigger title */
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      margin: 0 0 0.3rem;
+      text-shadow: 0 3px 6px rgba(0,0,0,0.35);  /* more pop */
+    }
+
+    .title-sub {
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 0.45rem;
+    }
+
+    .title-text {
+      max-width: 520px;
+      margin: 0 auto;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+    }
+
+    .pill-badge {
+      border-radius: var(--radius-pill);
+      padding: 0.75rem 1.9rem;        /* bigger bubbles */
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2c1810;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      box-shadow: var(--shadow-soft);
+      border: 2px solid rgba(0,0,0,0.15);
+      min-width: 240px;               /* consistent big pills */
+    }
+
+    .pill-yellow {
+      background: var(--accent-yellow);
+    }
+
+    .pill-green {
+      background: var(--accent-green);
+    }
+
+    .pill-orange {
+      background: var(--accent-orange);
+    }
+
+    .pill-red {
+      background: var(--accent-red);
+    }
+
+    .pill-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pill-icon svg {
+      display: block;
+    }
+
+    /* ========== MAIN PANELS ========== */
+
+    .main-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: flex-start;
+      margin-bottom: 1.75rem;
+    }
+
+    @media (max-width: 900px) {
+      .main-panels {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: var(--panel-bg);
+      border-radius: var(--radius-panel);
+      box-shadow: var(--shadow-soft);
+      border: 3px solid var(--panel-border);
+      padding: 1.2rem 1.4rem 1.1rem;
+      min-height: 360px;
+      position: relative;
+    }
+
+    .panel-title {
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+    }
+
+    /* form layout inside left panel */
+
+    .form-section {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    label {
+      font-size: 0.83rem;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.2rem;
+      color: var(--text-dark);
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.55rem 0.65rem;
+      margin-bottom: 0.7rem;
+      border-radius: 10px;
+      border: 1px solid #71c2df;
+      font-size: 0.9rem;
+      background: #e1f7ff;
+      color: #111827;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #6b7280;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: #ff9b68;
+      box-shadow: 0 0 0 2px rgba(255,155,104,0.4);
+      background: #f0fbff;
+    }
+
+    textarea {
+      min-height: 70px;
+      resize: vertical;
+    }
+
+    select {
+      background-image: linear-gradient(45deg, transparent 50%, #6b7280 50%),
+                        linear-gradient(135deg, #6b7280 50%, transparent 50%);
+      background-position: calc(100% - 14px) calc(50% - 3px),
+                           calc(100% - 9px) calc(50% - 3px);
+      background-size: 7px 7px, 7px 7px;
+      background-repeat: no-repeat;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+
+    .row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .row > div {
+      flex: 1 1 180px;
+    }
+
+    .tag-muted {
+      font-size: 0.78rem;
+      color: #4b5563;
+      display: inline-block;
+      margin-top: -0.25rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .pill-mini {
+      display: inline-flex;
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      background: #ffe6b3;
+      border: 1px solid rgba(0,0,0,0.18);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #4b5563;
+    }
+
+    .button-row {
+      margin-top: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    button {
+      border: none;
+      border-radius: 9999px;
+      padding: 0.55rem 1.35rem;
+      font-size: 0.9rem;
+      font-weight: 650;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: transform 0.08s ease, box-shadow 0.15s ease, background 0.15s ease, opacity 0.1s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ff9b68, #ff6464);
+      color: #1f2933;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.3);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.55;
+      box-shadow: none;
+      transform: none;
+      cursor: default;
+    }
+
+    .btn-secondary {
+      background: #fdf4ff;
+      color: #4b5563;
+      border: 1px solid #f9a8d4;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.26);
+    }
+
+    .btn-secondary:disabled {
+      opacity: 0.5;
+      transform: none;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    .btn-small {
+      padding: 0.35rem 0.95rem;
+      font-size: 0.78rem;
+      box-shadow: none;
+    }
+
+    #status {
+      margin-top: 0.6rem;
+      font-size: 0.82rem;
+      color: #374151;
+    }
+
+    /* current recipe content */
+
+    .macro-row {
+      font-size: 0.8rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.4rem;
+      margin-top: 0.25rem;
+    }
+
+    .macro-pill {
+      background: #ffe3f1;
+      border-radius: 999px;
+      padding: 0.12rem 0.6rem;
+      color: #7e1a53;
+      border: 1px solid #f9a8d4;
+    }
+
+    .recipe-section-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-top: 0.7rem;
+      margin-bottom: 0.35rem;
+    }
+
+    ul, ol {
+      margin-top: 0.25rem;
+      margin-bottom: 0.3rem;
+      padding-left: 1.2rem;
+      font-size: 0.9rem;
+      color: #374151;
+    }
+
+    /* bottom cards */
+
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 1rem;
+      margin-top: 1.1rem;
+    }
+
+    @media (max-width: 900px) {
+      .bottom-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .bottom-card {
+      background: #0094ad;
+      border-radius: 16px;
+      padding: 1rem 1.1rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      border: 2px solid rgba(255,255,255,0.45);
+      color: #f9fafb;
+      font-size: 0.9rem;
+    }
+
+    .bottom-card h3 {
+      margin-top: 0;
+      margin-bottom: 0.4rem;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fdfdfd;
+      font-family: "Georgia", "Times New Roman", serif;
+    }
+
+    .bottom-card label {
+      color: #fdfdfd;
+    }
+
+    .bottom-card input {
+      background: #ebf8ff;
+    }
+
+    .bottom-card p {
+      color: #e0f2fe;
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+
+    code {
+      font-size: 0.82rem;
+      background: rgba(0,0,0,0.2);
+      padding: 0.12rem 0.3rem;
+      border-radius: 4px;
+    }
+
+    .tag-muted-light {
+      font-size: 0.8rem;
+      color: #dbeafe;
+    }
+
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="pill-badge pill-yellow">
+        <span class="pill-icon">
+          <!-- dumbbell / strength SVG - bigger -->
+          <svg width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="9" width="2" height="6" rx="0.7" fill="#78350f"/>
+            <rect x="17" y="9" width="2" height="6" rx="0.7" fill="#78350f"/>
+            <rect x="8" y="10" width="8" height="4" rx="1" fill="#f97316"/>
+            <rect x="4" y="10" width="1.5" height="4" rx="0.7" fill="#78350f"/>
+            <rect x="18.5" y="10" width="1.5" height="4" rx="0.7" fill="#78350f"/>
+          </svg>
+        </span>
+        <span>High-protein builds</span>
+      </div>
+      <div class="pill-badge pill-green">
+        <span class="pill-icon">
+          <!-- leaf / fit vibes SVG - bigger -->
+          <svg width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 19C5 15 8 10 13 9V7C13 5.34315 14.3431 4 16 4C17.6569 4 19 5.34315 19 7V8C19 13 15 19 9 20.5C6.5 21.1 5 20 5 19Z"
+                  fill="#15803d" opacity="0.25"/>
+            <path d="M8 17C8.5 15 10 12 13 11" stroke="#14532d" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span>Fit-but-fun vibes</span>
+      </div>
+    </div>
+
+    <div class="header-center">
+      <div class="title-main">Creami AI Studio</div>
+      <div class="title-sub">Design your perfect pint</div>
+      <p class="title-text">
+        Set your calories, protein, flavor, and guardrails. Creami AI Studio rebuilds the recipe
+        from scratch to match your macros while leaning hard into taste.
+      </p>
+    </div>
+
+    <div class="header-right">
+      <div class="pill-badge pill-orange">
+        <span class="pill-icon">
+          <!-- ice cream SVG - bigger -->
+          <svg width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 11C5.9 11 5 10.1 5 9C5 7.9 5.9 7 7 7C7.2 7 7.4 7 7.6 7.1C8 5.9 9.1 5 10.4 5C11 5 11.5 5.2 12 5.5C12.4 4.6 13.3 4 14.3 4C15.8 4 17 5.2 17 6.6C17 6.7 17 6.8 17 6.9C17.6 7.1 18 7.7 18 8.4C18 9.3 17.3 10 16.4 10H7Z"
+                  fill="#fef3c7"/>
+            <path d="M8 11L10.5 20.5C10.7 21.3 11.3 21.8 12 21.8C12.7 21.8 13.3 21.3 13.5 20.5L16 11H8Z"
+                  fill="#fb923c"/>
+          </svg>
+        </span>
+        <span>Dessert-like texture</span>
+      </div>
+      <div class="pill-badge pill-red">
+        <span class="pill-icon">
+          <!-- heart/macro SVG - bigger -->
+          <svg width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 19C12 19 6 15 6 10.5C6 8.6 7.6 7 9.5 7C10.6 7 11.6 7.6 12 8.4C12.4 7.6 13.4 7 14.5 7C16.4 7 18 8.6 18 10.5C18 15 12 19 12 19Z"
+                  fill="#fee2e2"/>
+            <path d="M10 11.5H11.3L12 9.5L12.7 13L13.4 11.5H14.7"
+                  stroke="#b91c1c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span>Macro-conscious options</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN PANELS -->
+  <div class="main-panels">
+    <!-- LEFT: create form -->
+    <div class="panel">
+      <h2 class="panel-title">Create a New Creami Recipe</h2>
+
+      <div class="form-section">
+        <div class="row">
+          <div>
+            <label for="flavor">Flavor direction</label>
+            <input type="text" id="flavor" placeholder="e.g. lemon cheesecake, chocolate peanut butter cup, strawberry shortcake" />
+          </div>
+          <div>
+            <label for="protein">Target protein (g)</label>
+            <input type="number" id="protein" placeholder="e.g. 30" min="0" />
+            <span class="tag-muted">
+              Leave blank or zero if <span class="pill-mini">I don't care</span>.
+            </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="calories">Target calories per pint</label>
+            <input type="number" id="calories" placeholder="e.g. 250" min="0" />
+            <span class="tag-muted">
+              Leave blank or zero if <span class="pill-mini">I don't care</span>.
+            </span>
+          </div>
+          <div>
+            <label for="baseStyle">Base style</label>
+            <select id="baseStyle">
+              <option value="auto">I don't care (choose the best match)</option>
+              <option value="high-protein froyo">High-protein froyo (Greek yogurt heavy)</option>
+              <option value="classic ice cream style">Classic ice cream style (creamier, higher fat)</option>
+              <option value="sorbet">Sorbet (fruit-forward, no dairy)</option>
+              <option value="light high-volume">Light / high-volume (macro friendly)</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="avoid">Ingredients to avoid</label>
+        <textarea id="avoid" placeholder="e.g. no artificial sweeteners, no dairy, no banana"></textarea>
+        <span class="tag-muted">
+          Leave empty if <span class="pill-mini">I don't care</span>.
+        </span>
+
+        <div class="button-row">
+          <button class="btn-primary" id="generateBtn">
+            Generate recipe
+          </button>
+          <button class="btn-secondary" id="regenerateBtn" disabled>
+            Generate another
+          </button>
+        </div>
+        <div id="status"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: current recipe -->
+    <div class="panel" id="currentRecipeCard" style="display:none;">
+      <h2 class="panel-title">Current Recipe</h2>
+      <div id="recipeContent"></div>
+      <div style="margin-top:0.75rem;">
+        <button class="btn-secondary btn-small" id="saveRecipeBtn">Save to my Creami cookbook</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM SECTION: cookbook + API -->
+  <div class="bottom-grid">
+    <div class="bottom-card">
+      <h3>My Creami cookbook</h3>
+      <div id="cookbook"></div>
+    </div>
+
+    <div class="bottom-card">
+      <h3>OpenAI API settings</h3>
+      <p>
+        Enter your OpenAI API key to generate recipes. This key is stored only in your
+        browser on this device.
+      </p>
+      <label for="apiKey">OpenAI API key</label>
+      <input type="text" id="apiKey" placeholder="sk-..." />
+      <p class="tag-muted-light">
+        For a public launch, you should not expose your key in the browser.
+        This setup is ideal for testing and personal use. A server-based version can come next.
+      </p>
+      <p class="tag-muted-light">
+        For quick testing with friends, you can share this <code>index.html</code> file and
+        they can open it locally with their own key.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ====== Storage helpers ======
+  const apiKeyInput = document.getElementById('apiKey');
+  const cookbookDiv = document.getElementById('cookbook');
+  const currentRecipeCard = document.getElementById('currentRecipeCard');
+  const recipeContentDiv = document.getElementById('recipeContent');
+  const statusDiv = document.getElementById('status');
+  const generateBtn = document.getElementById('generateBtn');
+  const regenerateBtn = document.getElementById('regenerateBtn');
+  const saveRecipeBtn = document.getElementById('saveRecipeBtn');
+
+  let lastRequestPayload = null;
+  let currentRecipe = null;
+
+  function loadFromStorage() {
+    const savedKey = localStorage.getItem('creami_api_key');
+    if (savedKey) apiKeyInput.value = savedKey;
+
+    const savedCookbook = localStorage.getItem('creami_cookbook');
+    if (savedCookbook) {
+      try {
+        const recipes = JSON.parse(savedCookbook);
+        renderCookbook(recipes);
+      } catch (e) {
+        console.error('Error parsing cookbook', e);
+      }
+    } else {
+      renderCookbook([]);
+    }
+  }
+
+  function saveApiKey() {
+    const key = apiKeyInput.value.trim();
+    if (key) localStorage.setItem('creami_api_key', key);
+  }
+
+  apiKeyInput.addEventListener('change', saveApiKey);
+  apiKeyInput.addEventListener('blur', saveApiKey);
+
+  function getCookbook() {
+    const savedCookbook = localStorage.getItem('creami_cookbook');
+    if (!savedCookbook) return [];
+    try {
+      return JSON.parse(savedCookbook);
+    } catch {
+      return [];
+    }
+  }
+
+  function saveCookbook(recipes) {
+    localStorage.setItem('creami_cookbook', JSON.stringify(recipes));
+    renderCookbook(recipes);
+  }
+
+function renderCookbook(recipes) {
+  if (!recipes.length) {
+    cookbookDiv.innerHTML = '<p>No recipes saved yet. Generate a recipe and click “Save to my Creami cookbook”.</p>';
+    return;
+  }
+
+  cookbookDiv.innerHTML = '';
+  recipes.forEach((r, idx) => {
+    const card = document.createElement('div');
+    card.style.borderRadius = '12px';
+    card.style.border = '1px solid rgba(255,255,255,0.6)';
+    card.style.background = 'rgba(191,239,255,0.18)';
+    card.style.padding = '0.55rem 0.6rem';
+    card.style.marginBottom = '0.6rem';
+
+    card.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.25rem;gap:0.4rem;">
+        <div style="flex:1 1 auto;min-width:0;">
+          <div style="font-weight:700;font-size:0.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            ${r.title || 'Untitled recipe'}
+          </div>
+          <div style="font-size:0.78rem;opacity:0.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            ${r.flavor || ''}
+          </div>
+        </div>
+        <div style="display:flex;gap:0.35rem;flex-shrink:0;">
+          <button class="btn-secondary btn-small" data-load-index="${idx}">Load</button>
+          <button class="btn-secondary btn-small" data-delete-index="${idx}" style="background:#fee2e2;border-color:#fecaca;color:#7f1d1d;">
+            Delete
+          </button>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:0.4rem;font-size:0.78rem;">
+        <span class="macro-pill">${r.macros?.calories ?? '—'} kcal</span>
+        <span class="macro-pill">${r.macros?.protein_g ?? '—'} g protein</span>
+        <span class="macro-pill">${r.macros?.carbs_g ?? '—'} g carbs</span>
+        <span class="macro-pill">${r.macros?.fat_g ?? '—'} g fat</span>
+      </div>
+    `;
+
+    const loadBtn = card.querySelector('button[data-load-index]');
+    const deleteBtn = card.querySelector('button[data-delete-index]');
+
+    // Load button
+    loadBtn.addEventListener('click', () => {
+      renderRecipe(r);
+      currentRecipe = r;
+      currentRecipeCard.style.display = 'block';
+    });
+
+    // Delete button
+    deleteBtn.addEventListener('click', () => {
+      const cookbook = getCookbook();
+      cookbook.splice(idx, 1);      // remove this recipe
+      saveCookbook(cookbook);       // updates localStorage + re-renders
+      statusDiv.textContent = 'Recipe removed from your Creami cookbook.';
+    });
+
+    cookbookDiv.appendChild(card);
+  });
+}
+
+
+  // ====== Core generation logic ======
+  async function generateRecipe() {
+    const apiKey = apiKeyInput.value.trim();
+    if (!apiKey) {
+      alert('Please enter your OpenAI API key first.');
+      return;
+    }
+
+    const flavor = document.getElementById('flavor').value.trim();
+       const protein = Number(document.getElementById('protein').value);
+    const calories = Number(document.getElementById('calories').value);
+    const baseStyle = document.getElementById('baseStyle').value;
+    const avoid = document.getElementById('avoid').value.trim();
+
+    const payload = {
+      flavor: flavor || null,
+      protein: protein > 0 ? protein : null,
+      calories: calories > 0 ? calories : null,
+      baseStyle,
+      avoid: avoid || null
+    };
+
+    lastRequestPayload = payload;
+
+    statusDiv.textContent = 'Generating recipe...';
+    generateBtn.disabled = true;
+    regenerateBtn.disabled = true;
+    saveRecipeBtn.disabled = true;
+
+    try {
+      const systemPrompt = `
+You are an expert at creating Ninja Creami recipes.
+
+Global behavior:
+- Your primary goal is to create 1-pint Creami recipes that:
+  1) Match the user's macro targets as closely as possible.
+  2) Optimize flavor and texture based on those macros.
+  3) Maintain a sweetness perception similar to the following baseline vanilla recipe:
+     * 1 scoop Optimum Nutrition Gold Standard Vanilla Ice Cream protein powder
+     * 175 mL fat-free milk (or similar dairy/non-dairy milk)
+     * 170 g 0% fat Greek yogurt
+     * 10 g sugar-free vanilla pudding mix (e.g., Jell-O)
+     * Pinch of salt
+     * 15 g monk fruit sweetener
+     Treat this baseline as sweetness level 1.0 and keep new recipes between 0.9 and 1.1 in perceived sweetness unless the flavor style obviously suggests different (e.g. tart lemon).
+
+Macro and ingredient rules:
+- Total mix volume: suitable for one Ninja Creami pint; total ingredient mass ~430–520 g (ideal ~450–500 g).
+- If a calories target is provided:
+  - Aim to land within ±5–10% of that target.
+- If a protein target is provided:
+  - Aim to land within ±2–3 g of that target.
+- Macros must be consistent with the ingredients and their approximate nutrition values, not arbitrary numbers.
+- If there is a conflict between hitting protein vs calories:
+  - Prioritize hitting protein first, then adjust fat/carbs to tune calories.
+
+Flavor optimization behavior:
+- You are free to change ingredients away from the baseline recipe to maximize flavor under the macro constraints.
+- If the user wants LOWER protein and HIGHER calories:
+  - Reduce reliance on protein powder and Greek yogurt.
+  - Increase use of richer, indulgent ingredients (e.g., heavy cream, cream cheese, full-fat dairy, cookie pieces, chocolate, nut butters) while keeping sweetness in range.
+- If the user wants HIGH protein and LOWER calories:
+  - Favor 0% Greek yogurt, protein powder, and high-volume, low-calorie ingredients (e.g., fruit, unsweetened almond milk).
+  - Limit heavy cream, cream cheese, and sugary add-ins.
+- If protein and calories are moderate, balance components for both taste and macros.
+- Base style influences what you choose but does not override macro constraints:
+  * "high-protein froyo" → more Greek yogurt/protein, lower fat.
+  * "classic ice cream style" → more cream/whole-fat dairy, less yogurt.
+  * "sorbet" → fruit-driven, no dairy at all.
+  * "light high-volume" → high protein, low calories, lots of water/fruit/air.
+
+Consistency requirement:
+- You must derive macros from the ingredients you choose using your approximate nutrition knowledge.
+- Do not output macros that clearly contradict the chosen ingredients and quantities.
+- If necessary, adjust ingredient amounts to get macros closer to the target while maintaining a realistic and tasty recipe.
+
+Output format:
+Return ONLY strict JSON with this shape, no extra commentary:
+
+{
+  "title": string,
+  "flavor": string,
+  "ingredients": [
+    {
+      "name": string,
+      "grams": number,
+      "household": string
+    }
+  ],
+  "instructions": [
+    string
+  ],
+  "macros": {
+    "calories": number,
+    "protein_g": number,
+    "carbs_g": number,
+    "fat_g": number
+  },
+  "notes": string
+}
+`;
+
+      const userPrompt = buildUserPrompt(payload);
+
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer " + apiKey,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          model: "gpt-4o-mini",
+          messages: [
+            { role: "system", content: systemPrompt },
+            { role: "user", content: userPrompt }
+          ],
+          temperature: 0.8
+        })
+      });
+
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error("OpenAI API error: " + text);
+      }
+
+      const data = await response.json();
+      const content = data.choices[0].message.content.trim();
+
+      const jsonText = content.replace(/```json/g, '').replace(/```/g, '');
+      const recipe = JSON.parse(jsonText);
+
+      currentRecipe = recipe;
+      renderRecipe(recipe);
+
+      currentRecipeCard.style.display = 'block';
+      statusDiv.textContent = 'Recipe generated. You can adjust inputs or generate another variation.';
+      regenerateBtn.disabled = false;
+      saveRecipeBtn.disabled = false;
+    } catch (err) {
+      console.error(err);
+      statusDiv.textContent = 'Error: ' + err.message;
+    } finally {
+      generateBtn.disabled = false;
+    }
+  }
+
+  function buildUserPrompt(payload) {
+    const parts = [];
+    parts.push("Generate a 1-pint Ninja Creami recipe following these constraints:");
+    if (payload.flavor) {
+      parts.push(`- Target flavor profile: "${payload.flavor}".`);
+    } else {
+      parts.push("- Flavor: you can choose something creative that would be appealing.");
+    }
+    if (payload.protein) {
+      parts.push(`- Target protein: about ${payload.protein} g per pint (±2–3 g).`);
+    } else {
+      parts.push("- Protein: no specific numeric target; choose a reasonable amount that fits the base style.");
+    }
+    if (payload.calories) {
+      parts.push(`- Target calories: about ${payload.calories} kcal per pint (±5–10%).`);
+    } else {
+      parts.push("- Calories: no strict target; keep it roughly in the 150–450 kcal range unless the style suggests otherwise.");
+    }
+    if (payload.baseStyle && payload.baseStyle !== "auto") {
+      parts.push(`- Base style: ${payload.baseStyle}.`);
+    } else {
+      parts.push("- Base style: choose what best fits the flavor and macros.");
+    }
+    if (payload.avoid) {
+      parts.push(`- Do NOT use: ${payload.avoid}.`);
+    } else {
+      parts.push("- No ingredient restrictions.");
+    }
+    parts.push("- Remember: adjust ingredient types and amounts to hit the macros first, then maximize flavor and texture.");
+    parts.push("- Output must be valid JSON only, matching the specified schema.");
+    return parts.join("\n");
+  }
+
+  function renderRecipe(r) {
+    const ingredientsHtml = (r.ingredients || [])
+      .map(ing => `<li>${ing.name} – <strong>${ing.grams} g</strong> (${ing.household})</li>`)
+      .join("");
+
+    const stepsHtml = (r.instructions || [])
+      .map(step => `<li>${step}</li>`)
+      .join("");
+
+    const macros = r.macros || {};
+    const notes = r.notes || '';
+
+    recipeContentDiv.innerHTML = `
+      <div style="font-weight:700;font-size:1rem;">${r.title || 'Untitled recipe'}</div>
+      <div style="font-size:0.85rem;color:#4b5563;margin-top:0.1rem;"><em>${r.flavor || ''}</em></div>
+
+      <div class="macro-row">
+        <span class="macro-pill">${macros.calories ?? '—'} kcal</span>
+        <span class="macro-pill">${macros.protein_g ?? '—'} g protein</span>
+        <span class="macro-pill">${macros.carbs_g ?? '—'} g carbs</span>
+        <span class="macro-pill">${macros.fat_g ?? '—'} g fat</span>
+      </div>
+
+      <div class="recipe-section-title">Ingredients</div>
+      <ul>${ingredientsHtml}</ul>
+
+      <div class="recipe-section-title">Instructions</div>
+      <ol>${stepsHtml}</ol>
+
+      ${notes ? `<div class="recipe-section-title">Notes</div><p style="font-size:0.88rem;color:#374151;">${notes}</p>` : ''}
+    `;
+  }
+
+  generateBtn.addEventListener('click', () => generateRecipe());
+  regenerateBtn.addEventListener('click', () => {
+    if (!lastRequestPayload) {
+      generateRecipe();
+    } else {
+      generateRecipe();
+    }
+  });
+
+  saveRecipeBtn.addEventListener('click', () => {
+    if (!currentRecipe) return;
+    const cookbook = getCookbook();
+    cookbook.unshift(currentRecipe);
+    saveCookbook(cookbook);
+    statusDiv.textContent = 'Recipe saved to your Creami cookbook.';
+  });
+
+  loadFromStorage();
+</script>
+</body>
+</html>
